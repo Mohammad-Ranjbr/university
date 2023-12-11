@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Student Login</title>
+  </head>
+  <body>
+    
+	<!-- Navbar -->
+	
+	<nav class="navbar navbar-expand-lg navbar-dark bg-danger" dir="rtl">  
+	  <a class="navbar-brand" href="#">سیستم مدیریت دانشجویان</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+
+	  	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+	    	<ul class="navbar-nav mr-auto">
+	      	<li class="nav-item active">
+	        	<a class="nav-link" href="s-home">خانه</a>
+	      </li>
+	    </ul>
+	    </div>
+	</nav>
+	
+	<!-- Navbar -->
+	
+	<!-- ------------------------------------------------------------------------------------------------------------------------------- -->
+		
+	<!-- Alert -->
+	
+	<div th:if="${session.sMessage}" dir="rtl">
+		<div class="alert alert-success" role="alert" dir="rtl" th:text="${session.sMessage}" align="center"></div>
+		<th:bolck th:text="${#session.removeAttribute('sMessage')}"></th:bolck> 
+	</div>
+	
+	<!-- Alert -->
+	
+	<!-- ------------------------------------------------------------------------------------------------------------------------------- -->
+	
+	<!-- Form --><br><br><br><br><br><br>
+	
+	<div class="container" align="right">
+		<div class="row">
+			<div class="col-md-6 offset-md-3">
+				<div class="card">
+					<div class="card-body">
+						<h3 class="text-center text-prinary">سامانه مدیریت دانشجویان</h3>
+						
+						<!-- Alert -->
+	
+						<div th:if="${session.slError}" th:classappend="${session.slError}"> 
+							<div class="alert alert-danger" role="alert" dir="rtl" th:text="${session.slError}" align="center"></div>
+							<th:bolck th:text="${#session.removeAttribute('slError')}"></th:bolck> 
+						</div>
+						
+						<form method="post" th:action="@{/slogin}" th:object="${student}">
+
+							<div class="form-group">
+								<label>: ایمیل</label>
+								<input type="text" class="form-control" name="email" th:field="*{email}">
+							</div>
+							
+							<div class="form-group">
+								<label>: رمز عبور</label>
+								<input type="password" class="form-control" name="password" th:field="*{password}"> 
+							</div>
+
+							<div class="form-group">
+								<div align="right"><label >من ربات نیستم</label></div>
+								<div class="g-recaptcha" data-sitekey="6LeRJPUkAAAAAHkVVQAzjUHUurHQvjmxPy1-QviB" align="center"></div>
+							</div>
+							
+							<button class="btn btn-danger btn-block">ورود به سامانه</button><br>
+							
+							<div align="right">
+								<a th:href="@{/s-forget}" >آیا رمز عبور خود را فراوش کرده اید؟</a> 
+							</div>
+							
+						</form>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Form -->
+	
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  </body>
+</html>
